@@ -10,17 +10,16 @@ function HomeController() {
 HomeController.prototype.index = function(req, res) {
   var inputWord = req.query.input;
   var status = req.query.status;
+  var dataHelper = new DataHelper();
+  var bookmarks;
+
   if(status === "search") {
-    var patten = new RegExp("("+inputWord+")","ig");
-    var result = data.filter(function (subData){
-      return patten.test(subData.title);
-    });
-    var dataHelper = new DataHelper();
-    var bookmarks = dataHelper.getBookmarks(result);
-    res.send(bookmarks);
+    var filteredBookmarks = dataHelper.filterBookmarks(inputWord, data);
+    bookmarks = dataHelper.getBookmarks(filteredBookmarks);
+    var count = (inputWord === '') ? -1 : bookmarks.length;
+    res.send({bookmarks:bookmarks, count: count});
   } else {
-    var dataHelper = new DataHelper();
-    var bookmarks = dataHelper.getBookmarks(data);
+    bookmarks = dataHelper.getBookmarks(data);
     res.render('index', {bookmarks: bookmarks});
   }
 };
