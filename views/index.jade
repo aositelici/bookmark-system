@@ -3,11 +3,17 @@ head
     meta(charset='UTF-8')
     title bookmark system
     link(rel='stylesheet', href='stylesheets/style.css')
+    link(rel='stylesheet', href='stylesheets/jpage/jPages.css')
+    link(rel='stylesheet', href='stylesheets/jpage/animate.css')
     script(type='text/javascript', src='javascripts/jquery.min.js')
+    script(type='text/javascript', src='javascripts/jPages.min.js')
+    script(type='text/javascript', src='javascripts/pager.js')
   body
-    input#search(type='text')
-    .content
+    input#search(type='text')  
+    ul#content
       each bookmark in bookmarks
-        p.bookmark #{bookmark.title}
-        p.date #{bookmark.date}
-        hr.line
+        li.list
+          p.bookmark #{bookmark.title}
+          p.date #{bookmark.date}
+          hr.line
+    div.holder

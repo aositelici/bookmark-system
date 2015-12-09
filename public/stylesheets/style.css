@@ -7,9 +7,12 @@ body {
   height: 35px;
   width: 800px;
 }
-.content {
+#content {
   margin: 50px 200px 20px 200px;
   text-align: left;
+}
+.list {
+  list-style-type:none;
 }
 .bookmark {
   margin-bottom: 0px;
