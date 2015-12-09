@@ -20,6 +20,14 @@ DataHelper.prototype.getBookmarks = function(data) {
   return this.bookmarks;
 };
 
+DataHelper.prototype.filterBookmarks = function(keyword, data) {
+  var patten = new RegExp("("+keyword+")","ig");
+  var result = data.filter(function (subData){
+    return patten.test(subData.title);
+  });
+  return result;
+};
+
 DataHelper.prototype.addBookmark = function(bookmark) {
   this.bookmarks.push(bookmark);
 };
