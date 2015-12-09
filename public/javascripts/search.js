@@ -4,15 +4,13 @@ $(document).ready(function() {
       .replace(/^\s+|\s+$/g, "")
       .replace(/\s+/g, "|");
 
-    if(inputWord !== '') {
       $.get('/', {input: inputWord, status: "search"}, function (res) {
          $("#content").html("");
          res.forEach(function(item) {
            appendBookmark(item.title,item.date);
          });
          setPage();
-       });
-    }
+       });  
   });
 
   function setPage() {
