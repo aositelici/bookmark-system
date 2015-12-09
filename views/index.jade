@@ -1,0 +1,13 @@
+doctype html(lang='en')
+head
+    meta(charset='UTF-8')
+    title bookmark system
+    link(rel='stylesheet', href='stylesheets/style.css')
+    script(type='text/javascript', src='javascripts/jquery.min.js')
+  body
+    input#search(type='text')
+    .content
+      each bookmark in bookmarks
+        p.bookmark #{bookmark.title}
+        p.date #{bookmark.date}
+        hr.line
