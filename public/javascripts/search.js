@@ -6,11 +6,14 @@ $(document).ready(function() {
 
       $.get('/', {input: inputWord, status: "search"}, function (res) {
          $("#content").html("");
-         res.forEach(function(item) {
-           appendBookmark(item.title,item.date);
-         });
+          var bookmarks = res.bookmarks;
+          var count = res.count;
+          showCount(count);
+          bookmarks.forEach(function(bookmark) {
+            highLightMatchingword(inputWord, bookmark);
+          });
          setPage();
-       });  
+       });
   });
 
   function setPage() {
@@ -33,30 +36,19 @@ $(document).ready(function() {
     item.append(line);
     $('#content').append(item);
   }
-  /*function refreshContent(keyword) {
-    $.get('/', {input: keytword}, function (res) {
-       $("#content").html("");
-       res.forEach(function(item) {
-         appendbookmark(item.title,item.date);
-       });
-     });
-  }*/
 
-  /*function highLightMatchingword(inputWord, data, bookmarks) {
-    if(inputWord !== "") {
-      clearHtml();
 
-      var patten = new RegExp("("+inputWord+")","ig");
-      data.filter(function (subData){
-        return patten.test(subData.title);
-      })
-      .map(function (subData){
-        var highLightBookmark = subData.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
-        appendbookmark(highLightBookmark,subData.created);
-      });
+  function highLightMatchingword(keyword, item) {
+    var patten = new RegExp("("+keyword+")","ig");
+    var highLight = item.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
+    appendBookmark(highLight,item.date);
+  }
 
+  function showCount(count) {
+    if(count !== -1) {
+      $('#count').html('搜索到'+count+'个结果');
     } else {
-      showInitBookmark(bookmarks);
+      $('#count').html("");
     }
-  }*/
+  }
 });
