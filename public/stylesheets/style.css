@@ -14,16 +14,27 @@ body {
 .list {
   list-style-type:none;
 }
+.main {
+  display: inline-block;
+  width: 90%;
+}
 .bookmark {
   margin-bottom: 0px;
   font-size: 23px;
+
 }
 .date {
   margin-top: 2px;
   text-align: right;
   font-style: oblique;
+
 }
 .line {
   border:1px dashed ;
   border-bottom:0;
+}
+.delete {
+  display: inline;
+  margin-left: 10px;
+  width: 8%;
 }
