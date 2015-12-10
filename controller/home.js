@@ -24,12 +24,17 @@ HomeController.prototype.index = function(req, res) {
   }
 };
 
-HomeController.prototype.add = function(res, req) {
+HomeController.prototype.add = function(req, res) {
 
 };
 
-HomeController.prototype.delete = function(res, req) {
+HomeController.prototype.delete = function(req, res) {
+  var deleteTitle = req.body.title;
+  var dataHelper = new DataHelper();
 
+  dataHelper.getBookmarks(data);
+  data = dataHelper.deleteBookmark(deleteTitle);
+  res.send('success');
 };
 
 module.exports = HomeController;
