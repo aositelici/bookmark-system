@@ -1,21 +1,16 @@
 doctype html(lang='en')
 head
-    meta(charset='UTF-8')
-    title bookmark system
-    link(rel='stylesheet', href='stylesheets/style.css')
-    link(rel='stylesheet', href='stylesheets/jpage/jPages.css')
-    link(rel='stylesheet', href='stylesheets/jpage/animate.css')
-    script(type='text/javascript', src='javascripts/jquery.min.js')
-    script(type='text/javascript', src='javascripts/jPages.min.js')
-    script(type='text/javascript', src='javascripts/pager.js')
-    script(type='text/javascript', src='javascripts/search.js')
+    include partials/_header.jade
   body
+    include partials/_deletemodal.jade
     input#search(type='text')
     p#count
     ul#content
       each bookmark in bookmarks
         li.list
-          p.bookmark #{bookmark.title}
-          p.date #{bookmark.date}
-          hr.line
+          .main
+            p.bookmark #{bookmark.title}
+            p.date #{bookmark.date}
+            hr.line
+          button.delete(value='#{bookmark.title}') delete
     div.holder
