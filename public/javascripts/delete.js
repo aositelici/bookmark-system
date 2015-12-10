@@ -1,4 +1,8 @@
 $(document).ready(function() {
+  deleteBookmark();
+});
+
+function deleteBookmark() {
   $('.delete').on('click', function() {
     var bookmarkTitle = $(this).val();
     var deletebutton = $(this);
@@ -19,4 +23,4 @@ $(document).ready(function() {
       });
     });
   });
-});
+}

@@ -4,7 +4,7 @@ $(document).ready(function() {
       .replace(/^\s+|\s+$/g, "")
       .replace(/\s+/g, "|");
 
-      $.get('/', {input: inputWord, status: "search"}, function (res) {
+      $.get('/', {input: inputWord, status: "search"}).done(function (res) {
          $("#content").html("");
           var bookmarks = res.bookmarks;
           var count = res.count;
@@ -13,35 +13,27 @@ $(document).ready(function() {
             highLightMatchingword(inputWord, bookmark);
           });
          setPage();
-       });
+         deleteBookmark();
+      });
   });
 
-  function setPage() {
-    $('.holder').jPages({
-        containerID : "content",
-        previous : "←",
-        next : "→",
-        perPage : 10,
-        delay : 10
-    });
-  }
-
-  function appendBookmark(title,date) {
+  function appendBookmark(originTitle, title, date) {
     var content='<p class="bookmark">' + title + '</p>';
     var createdDate = $("<p></p>").text(date).addClass("date");
-    var item = buildBookmark(content, createdDate);
+    var item = buildBookmark(originTitle, content, createdDate);
     $('#content').append(item);
   }
 
-  function buildBookmark(content, date) {
+  function buildBookmark(originTitle, title, date) {
+
     var line = $("<hr>").addClass("line");
     var item = $("<li></li>").addClass("list");
     var maincontent = $("<div></div>").addClass("main");
-    maincontent.append(content);
+    maincontent.append(title);
     maincontent.append(date);
     maincontent.append(line);
     item.append(maincontent);
-    var button = $("<button value='title'>delete</button>").addClass("delete");
+    var button = $("<button value='title'>delete</button>").addClass("delete").val(originTitle);
     item.append(button);
     return item;
   }
@@ -49,8 +41,9 @@ $(document).ready(function() {
 
   function highLightMatchingword(keyword, item) {
     var patten = new RegExp("("+keyword+")","ig");
+    var originTitle = item.title;
     var highLight = item.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
-    appendBookmark(highLight,item.date);
+    appendBookmark(originTitle, highLight,item.date);
   }
 
   function showCount(count) {

@@ -38,3 +38,13 @@ body {
   margin-left: 10px;
   width: 8%;
 }
+.holder {
+  display: inline;
+  width:50%;
+}
+.add {
+  display: inline;
+  width:100px;
+  margin-right: 400px;
+  margin-bottom: 10px;
+}
