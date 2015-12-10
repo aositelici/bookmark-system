@@ -29,12 +29,21 @@ $(document).ready(function() {
   function appendBookmark(title,date) {
     var content='<p class="bookmark">' + title + '</p>';
     var createdDate = $("<p></p>").text(date).addClass("date");
+    var item = buildBookmark(content, createdDate);
+    $('#content').append(item);
+  }
+
+  function buildBookmark(content, date) {
     var line = $("<hr>").addClass("line");
     var item = $("<li></li>").addClass("list");
-    item.append(content);
-    item.append(createdDate);
-    item.append(line);
-    $('#content').append(item);
+    var maincontent = $("<div></div>").addClass("main");
+    maincontent.append(content);
+    maincontent.append(date);
+    maincontent.append(line);
+    item.append(maincontent);
+    var button = $("<button value='title'>delete</button>").addClass("delete");
+    item.append(button);
+    return item;
   }
 
 
