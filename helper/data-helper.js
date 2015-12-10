@@ -32,10 +32,11 @@ DataHelper.prototype.addBookmark = function(bookmark) {
   this.bookmarks.push(bookmark);
 };
 
-DataHelper.prototype.deleteBookmark = function(bookmark) {
-  return this.bookmarks.filter(function(item) {
-    return item.title !== bookmark.title;
+DataHelper.prototype.deleteBookmark = function(title) {
+  this.bookmarks =  this.bookmarks.filter(function(item) {
+    return item.title !== title;
   });
+  return this.bookmarks;
 };
 
 module.exports = DataHelper;

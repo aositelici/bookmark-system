@@ -15,10 +15,11 @@ app.set('view engine', 'jade');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'lib')));
 route.setRoutes(app);
 
-app.listen(3000, function () {
-  console.log('listening 3000');
+app.listen(3050, function () {
+  console.log('listening 3050');
 });
 
 module.exports = app;
