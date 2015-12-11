@@ -6,5 +6,6 @@ var HomeController = require('../controller/home');
 
 var homeController = new HomeController();
 router.get('/', homeController.index);
-router.post('/', homeController.delete);
+router.delete('/', homeController.delete);
+router.post('/', homeController.add);
 module.exports = router;

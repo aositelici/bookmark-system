@@ -10,7 +10,7 @@ function deleteBookmark() {
     $('#delete').on('click', function() {
       $.ajax({
         url: '/',
-        method: 'POST',
+        method: 'DELETE',
         data: {
           title : bookmarkTitle
         },
