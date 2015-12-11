@@ -11,13 +11,12 @@ function search() {
       $.get('/', {input: inputWord, status: "search"}).done(function (res) {
          $("#content").html("");
           var bookmarks = res.bookmarks;
-          var count = res.count;
-          showCount(count);
           bookmarks.forEach(function(bookmark) {
             highLightMatchingword(inputWord, bookmark);
           });
          setPage();
          deleteBookmark();
+         showCount($("#content li").length);
       });
   });
 }
@@ -51,12 +50,15 @@ function buildBookmark(originTitle, title, date) {
 function highLightMatchingword(keyword, item) {
   var patten = new RegExp("("+keyword+")","ig");
   var originTitle = item.title;
-  var highLight = item.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
+  var highLight = item.title.replace(patten,'<font style="background-color:#f54698">'+'$1'+'</font>');
   appendBookmark(originTitle, highLight, item.date, item.address);
 }
 
 function showCount(count) {
-  if(count !== -1) {
+  var input = $('#search').val()
+    .replace(/^\s+|\s+$/g, "")
+    .replace(/\s+/g, "|");
+  if(input) {
     $('#count').html('搜索到'+count+'个结果');
   } else {
     $('#count').html("");
