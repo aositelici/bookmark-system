@@ -7,17 +7,16 @@ function search() {
     var inputWord = $(this).val()
       .replace(/^\s+|\s+$/g, "")
       .replace(/\s+/g, "|");
-
-      $.get('/', {input: inputWord, status: "search"}).done(function (res) {
-         $("#content").html("");
-          var bookmarks = res.bookmarks;
-          bookmarks.forEach(function(bookmark) {
-            highLightMatchingword(inputWord, bookmark);
-          });
-         setPage();
-         deleteBookmark();
-         showCount($("#content li").length);
-      });
+    $.get('/', {input: inputWord, status: "search"}).done(function (res) {
+       $("#content").html("");
+        var bookmarks = res.bookmarks;
+        bookmarks.forEach(function(bookmark) {
+          highLightMatchingword(inputWord, bookmark);
+        });
+       setPage();
+       deleteBookmark();
+       showCount($("#content li").length);
+    });
   });
 }
 
