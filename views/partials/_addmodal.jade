@@ -1,0 +1,13 @@
+#addModal.modal.fade(role="dialog", aria-hidden="true")
+  .modal-dialog
+    .modal-content
+      .modal-header
+        button.close(type="button", data-dismiss="modal") &#215;
+        h4.modal-title 添加书签
+      .modal-body
+        input#name.form-control( placeholder='书签名称', type='text', value='')
+        input#address.form-control( placeholder='书签地址', type='text', value='')
+        #input-null.text-danger.text-left
+          small 请输入正确的书签名称/书签链接
+      .modal-footer
+        button#add.btn.btn-default(type='button') 确定
