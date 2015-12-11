@@ -29,7 +29,7 @@ function addBookmark() {
             $("#content").html("");
             var bookmarks = res.bookmarks;
             bookmarks.forEach(function(bookmark) {
-              appendBookmark(bookmark.title, bookmark.title, bookmark.date);
+              appendBookmark(bookmark.title, bookmark.title, bookmark.date, bookmark.address);
             });
           }
         });

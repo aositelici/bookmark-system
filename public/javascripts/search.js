@@ -1,5 +1,9 @@
 $(document).ready(function() {
-  $("input:text").bind("input propertychange",function(){
+  search();
+});
+
+function search() {
+  $("#search").bind("input propertychange",function(){
     var inputWord = $(this).val()
       .replace(/^\s+|\s+$/g, "")
       .replace(/\s+/g, "|");
@@ -16,41 +20,45 @@ $(document).ready(function() {
          deleteBookmark();
       });
   });
+}
 
-  function appendBookmark(originTitle, title, date) {
-    var content='<p class="bookmark">' + title + '</p>';
-    var createdDate = $("<p></p>").text(date).addClass("date");
-    var item = buildBookmark(originTitle, content, createdDate);
-    $('#content').append(item);
+function appendBookmark(originTitle, title, date, address) {
+  var content;
+  if(address) {
+    content=$("<a></a>").addClass("bookmark").attr('href',address).text(title);
+  } else {
+    content='<p class="bookmark">' + title + '</p>';
   }
+  var createdDate = $("<p></p>").text(date).addClass("date");
+  var item = buildBookmark(originTitle, content, createdDate);
+  $('#content').append(item);
+}
 
-  function buildBookmark(originTitle, title, date) {
+function buildBookmark(originTitle, title, date) {
+  var line = $("<hr>").addClass("line");
+  var item = $("<li></li>").addClass("list");
+  var maincontent = $("<div></div>").addClass("main");
+  maincontent.append(title);
+  maincontent.append(date);
+  maincontent.append(line);
+  item.append(maincontent);
+  var button = $("<button value='title'>delete</button>").addClass("delete").val(originTitle);
+  item.append(button);
+  return item;
+}
 
-    var line = $("<hr>").addClass("line");
-    var item = $("<li></li>").addClass("list");
-    var maincontent = $("<div></div>").addClass("main");
-    maincontent.append(title);
-    maincontent.append(date);
-    maincontent.append(line);
-    item.append(maincontent);
-    var button = $("<button value='title'>delete</button>").addClass("delete").val(originTitle);
-    item.append(button);
-    return item;
+
+function highLightMatchingword(keyword, item) {
+  var patten = new RegExp("("+keyword+")","ig");
+  var originTitle = item.title;
+  var highLight = item.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
+  appendBookmark(originTitle, highLight, item.date, item.address);
+}
+
+function showCount(count) {
+  if(count !== -1) {
+    $('#count').html('搜索到'+count+'个结果');
+  } else {
+    $('#count').html("");
   }
-
-
-  function highLightMatchingword(keyword, item) {
-    var patten = new RegExp("("+keyword+")","ig");
-    var originTitle = item.title;
-    var highLight = item.title.replace(patten,'<span style="background-color:#f54698">'+'$1'+'</span>');
-    appendBookmark(originTitle, highLight,item.date);
-  }
-
-  function showCount(count) {
-    if(count !== -1) {
-      $('#count').html('搜索到'+count+'个结果');
-    } else {
-      $('#count').html("");
-    }
-  }
-});
+}
