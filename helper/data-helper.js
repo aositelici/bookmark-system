@@ -7,17 +7,21 @@ function DataHelper() {
 
 DataHelper.prototype.getFormatDate= function(number) {
     var date = new Date(parseInt(number)*1000);
-    return 'created@' + date.getFullYear() + '-' + (date.getMonth()+1) + '-' + (date.getDate()+1);
+    return 'created@' + date.getFullYear() + '-' + (date.getMonth()+1) + '-' + (date.getDate());
 };
 
-DataHelper.prototype.getBookmarks = function(data) {
+DataHelper.prototype.buildBookmarks = function(data) {
   var _this = this;
   data.forEach(function(item) {
     var date = _this.getFormatDate(item.created);
-    var bookmark = new Bookmark(item.title, date);
+    var bookmark = new Bookmark(item.title, date, item.address);
     _this.bookmarks.push(bookmark);
   });
   return this.bookmarks;
+};
+
+DataHelper.prototype.refreashBookmarks = function(bookmarks) {
+  this.bookmarks = bookmarks;
 };
 
 DataHelper.prototype.filterBookmarks = function(keyword, data) {
@@ -28,8 +32,11 @@ DataHelper.prototype.filterBookmarks = function(keyword, data) {
   return result;
 };
 
-DataHelper.prototype.addBookmark = function(bookmark) {
+DataHelper.prototype.addBookmark = function(data) {
+  var date = this.getFormatDate(data.date/1000);
+  var bookmark = new Bookmark(data.title, date, data.address);
   this.bookmarks.push(bookmark);
+  return this.bookmarks;
 };
 
 DataHelper.prototype.deleteBookmark = function(title) {
