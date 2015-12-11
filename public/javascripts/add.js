@@ -4,9 +4,9 @@ $(document).ready(function() {
 
 function addBookmark() {
   $('.add').on('click', function() {
-    $('#addModal').modal('show');
+    $('#addModal').unbind().modal('show');
     var date = new Date();
-    $('#add').on('click', function() {
+    $('#add').unbind().on('click', function() {
       if($('#name').val() === '' || $('#address').val() === '') {
         $('#input-null').css('display','block');
         return;
@@ -20,17 +20,20 @@ function addBookmark() {
             address: $('#address').val(),
             date: date
           },
-          success: function() {
+          success: function(res) {
             $('#name').val('');
             $('#address').val('');
             $('#input-null').css('display','none');
             $('#addModal').modal('hide');
-          },
-          error: function(request,status,errorthowm) {
-          alert(status);
-        }
-      });
-    }
+
+            $("#content").html("");
+            var bookmarks = res.bookmarks;
+            bookmarks.forEach(function(bookmark) {
+              appendBookmark(bookmark.title, bookmark.title, bookmark.date);
+            });
+          }
+        });
+      }
     });
   });
 }

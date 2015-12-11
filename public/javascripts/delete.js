@@ -6,8 +6,8 @@ function deleteBookmark() {
   $('.delete').on('click', function() {
     var bookmarkTitle = $(this).val();
     var deletebutton = $(this);
-    $('#deleteModal').modal('show');
-    $('#delete').on('click', function() {
+    $('#deleteModal').unbind().modal('show');
+    $('#delete').unbind().on('click', function() {
       $.ajax({
         url: '/',
         method: 'DELETE',
