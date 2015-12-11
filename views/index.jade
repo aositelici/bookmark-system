@@ -9,7 +9,10 @@ head
       each bookmark in bookmarks
         li.list
           .main
-            p.bookmark #{bookmark.title}
+            if bookmark.address
+              a.bookmark(herf=address) #{bookmark.title}
+            else
+              p.bookmark #{bookmark.title}
             p.date #{bookmark.date}
             hr.line
           button.delete(value='#{bookmark.title}') delete
