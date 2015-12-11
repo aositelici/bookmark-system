@@ -5,7 +5,7 @@ $(document).ready(function() {
 function addBookmark() {
   $('.add').on('click', function() {
     $('#addModal').unbind().modal('show');
-    var date = new Date();
+    var date = (new Date()).valueOf();;
     $('#add').unbind().on('click', function() {
       if($('#name').val() === '' || $('#address').val() === '') {
         $('#input-null').css('display','block');
@@ -31,6 +31,8 @@ function addBookmark() {
             bookmarks.forEach(function(bookmark) {
               appendBookmark(bookmark.title, bookmark.title, bookmark.date, bookmark.address);
             });
+            setPage();
+            deleteBookmark();
           }
         });
       }
