@@ -4,9 +4,8 @@ $(document).ready(function() {
 
 function search() {
   $("#search").bind("input propertychange",function(){
-    var inputWord = $(this).val()
-      .replace(/^\s+|\s+$/g, "")
-      .replace(/\s+/g, "|");
+    var inputWord = $(this).val();
+
     $.get('/', {input: inputWord, status: "search"}).done(function (res) {
        $("#content").html("");
         var bookmarks = res.bookmarks;
@@ -54,9 +53,8 @@ function highLightMatchingword(keyword, item) {
 }
 
 function showCount(count) {
-  var input = $('#search').val()
-    .replace(/^\s+|\s+$/g, "")
-    .replace(/\s+/g, "|");
+  var input = $('#search').val();
+
   if(input) {
     $('#count').html('搜索到'+count+'个结果');
   } else {
