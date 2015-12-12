@@ -1,6 +1,11 @@
 require 'capybara'
+require 'site_prism'
+require 'pry'
 require 'capybara/cucumber'
+require 'selenium-webdriver'
 require 'rspec'
+require 'require_all'
+require_all 'lib'
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :firefox)
