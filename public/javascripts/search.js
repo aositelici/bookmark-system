@@ -22,7 +22,7 @@ function search() {
 function appendBookmark(originTitle, title, date, address) {
   var content;
   if(address) {
-    content=$("<a></a>").addClass("bookmark").attr('href',address).text(title);
+    content="<a href=\""+address +"\" class='bookmark' >"+title+ "</a>";
   } else {
     content='<p class="bookmark">' + title + '</p>';
   }
@@ -48,7 +48,7 @@ function buildBookmark(originTitle, title, date) {
 function highLightMatchingword(keyword, item) {
   var patten = new RegExp("("+keyword+")","ig");
   var originTitle = item.title;
-  var highLight = item.title.replace(patten,'<font style="background-color:#f54698">'+'$1'+'</font>');
+  var highLight = item.title.replace(patten,"<em style='background-color:#f54698'>$&</em>");
   appendBookmark(originTitle, highLight, item.date, item.address);
 }
 
